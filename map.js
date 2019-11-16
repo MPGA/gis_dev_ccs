@@ -24,7 +24,7 @@ function style (feature) {
 }
 
 function forEachFeature(feature,layer) {
-  var popupContent = "<p><b>ESTADO:</b>"+ feature.properties.ESTADO+'</p>';
+  var popupContent = "<p><b>ESTADO: </b>"+ feature.properties.ESTADO+'</p>';
 
   layer.bindPopup(popupContent);
 }
@@ -35,12 +35,33 @@ $.getJSON("./data/venezuela.geojson",function(data){
 // add GeoJSON layer to the map once the file is loaded
 
 venezuela.addTo(map);
+});
 
-// var geoJsonLayer = L.geoJson(data, {style: styleFunction})
-// .addTo(map);
-// function styleFunction(){
-// return {color: "#e0e0e0"};
-// }
+
+var url = 'macizo_pacu.geojson';
+function styled (feature) {
+  return {
+    fillColor: '#D68910', 
+    fillOpacity: 0.3
+      
+  };
+}
+
+function forEachFeature(feature,layer) {
+  var popup_macizo = "<p><b>MUNICIPIO: </b>"+ feature.properties.Municipio +
+                "</br>ESTADO: "+ feature.properties.ESTADO+'</p>';
+
+  layer.bindPopup(popup_macizo);
+}
+var macizo_pacu = L.geoJson(null, {onEachFeature: forEachFeature, style: styled});
+
+$.getJSON("./data/macizo_pacu.geojson",function(data){
+  macizo_pacu.addData(data);
+// add GeoJSON layer to the map once the file is loaded
+
+
+macizo_pacu.addTo(map);
+
 
 });
 
