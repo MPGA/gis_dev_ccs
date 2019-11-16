@@ -10,16 +10,37 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     minZoom: 3
   }).addTo(map);
 
-  // load GeoJSON from an external file
-$.getJSON("./data/venezuela.geojson",function(data){
-// add GeoJSON layer to the map once the file is loaded
-L.geoJson(data).addTo(map);
-
-var geoJsonLayer = L.geoJson(data, {style: styleFunction})
-.addTo(map);
-function styleFunction(){
-return {color: "#e0e0e0"};
+  
+var url = 'venezuela.geojson';
+function style (feature) {
+  return {
+    fillColor: 'green', 
+        fillOpacity: 0.5,  
+        weight: 2,
+        opacity: 1,
+        color: '#ffffff',
+        dashArray: '3'
+  };
 }
+
+function forEachFeature(feature,layer) {
+  var popupContent = "<p><b>ESTADO:</b>"+ feature.properties.ESTADO+'</p>';
+
+  layer.bindPopup(popupContent);
+}
+var venezuela = L.geoJson(null, {onEachFeature: forEachFeature, style: style});
+
+$.getJSON("./data/venezuela.geojson",function(data){
+  venezuela.addData(data);
+// add GeoJSON layer to the map once the file is loaded
+
+venezuela.addTo(map);
+
+// var geoJsonLayer = L.geoJson(data, {style: styleFunction})
+// .addTo(map);
+// function styleFunction(){
+// return {color: "#e0e0e0"};
+// }
 
 });
 
