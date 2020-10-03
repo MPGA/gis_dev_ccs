@@ -1,3 +1,3 @@
 # gis_dev_ccs
-interactive map showing special environmental protected areas in the south of Venezuela
+interactive map showing environmental protected areas in the south of Venezuela
 
