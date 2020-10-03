@@ -1,3 +1,3 @@
 # gis_dev_ccs
-interactive map of Venezuela showing areas affected by illegal mining and deforestation
+interactive map showing special environmental protected areas in the south of Venezuela
 
